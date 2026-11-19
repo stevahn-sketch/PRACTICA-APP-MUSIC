@@ -1,22 +1,18 @@
 
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import {
-    BrowserRouter,
-    Routes,
-    Route
-} from 'react-router-dom';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import './components/Header/styles.css';
 import SearchResults from './components/SearchResults/SearchResults';
-import './components/SearchResults/styles.css';
 import SongDetails from './components/SongDetails/SongDetails';
 
 import Library from './components/Library/Library';
-import './components/Library/styles.css';
 import SearchBar from './components/SearchBar/SearchBar';
 import useFetch from './hooks/useFetch';
+import {ThemeProvider} from 'styled-components';
+import Theme from './theme/index';
+import GlobalStyle from './theme/GlobalStyles';
 
 function AppContent() {
     const [library, setLibrary] = useState([]);
@@ -48,39 +44,43 @@ function AppContent() {
     };
 
     return (
-        <div className="App">
-            <Header />
+        <ThemeProvider theme={Theme}>
+            <GlobalStyle />
+            <div className="App">
+                <Header />
 
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <>
-                            <SearchBar onSearch={setSearchedArtist} />
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <SearchBar onSearch={setSearchedArtist} />
 
-                            <SearchResults
-                                albums={albums}
-                                loading={loading}
-                                error={error}
-                                addToLibrary={addToLibrary}
-                                retryFetch={refetch}
-                            />
-                        </>
-                    }
-                />
+                                <SearchResults
+                                    albums={albums}
+                                    loading={loading}
+                                    error={error}
+                                    addToLibrary={addToLibrary}
+                                    retryFetch={refetch}
+                                    library={library}
+                                />
+                            </>
+                        }
+                    />
 
-                <Route
-                    path="/song/:id"
-                    element={<SongDetails />}
-                />
+                    <Route
+                        path="/song/:id"
+                        element={<SongDetails />}
+                    />
 
-                <Route
-                    path="/library"
-                    element={<Library songs={library} />}
-                />
+                    <Route
+                        path="/library"
+                        element={<Library songs={library} />}
+                    />
 
-            </Routes>
-        </div>
+                </Routes>
+            </div>
+        </ThemeProvider>
     );
 }
 

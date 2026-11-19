@@ -1,24 +1,25 @@
 import React, { Fragment, useEffect } from "react";
+import { LibraryArticle, LibraryTitle, LibraryInfo, LibrarySubTitle } from "./styles";
 
 const Library = ({ songs }) => {
 
     return (
         <Fragment>
-            <h2>Mi biblioteca</h2>
+            <LibraryTitle>Mi biblioteca</LibraryTitle>
 
             {songs.length === 0 ? (
-                <p>Aún no has agregado canciones a tu biblioteca.</p>
+                <LibraryInfo>Aún no has agregado canciones a tu biblioteca.</LibraryInfo>
                 ) : (
                 <section>
                     {songs.map((song) => {
                         const { id, titulo, artista, duracion } = song;
 
                         return (
-                            <article key={id}>
-                                <h3>{titulo}</h3>
-                                <p>Artista: {artista}</p>
-                                <p>Duración: {duracion}</p>
-                            </article>
+                            <LibraryArticle key={id}>
+                                <LibrarySubTitle>{titulo}</LibrarySubTitle>
+                                <LibraryInfo>Artista: {artista}</LibraryInfo>
+                                <LibraryInfo>Duración: {duracion}</LibraryInfo>
+                            </LibraryArticle>
                         );
                     })}
                 </section>

@@ -1,12 +1,13 @@
 import React, {Fragment} from 'react';
-import {Link} from 'react-router-dom';
+import {SearchSection, SearchTitle, SearchArticle, SearchSubTitle, SearchInfo, SearchButton, SearchLink } from './styles';
 
 const SearchResults = ({
     albums,
     loading,
     error,
     addToLibrary,
-    retryFetch
+    retryFetch,
+    library
 }) => {
     if(loading) {
         return <p>Cargando...</p>;
@@ -30,11 +31,11 @@ const SearchResults = ({
 
     return (
         <Fragment>
-            <h2 className="results">
+            <SearchTitle>
                 Resultados de la busqueda
-            </h2>
+            </SearchTitle>
 
-            <section>
+            <SearchSection>
                 {albums.map((album) =>{
                     const song = {
                         id: album.idAlbum,
@@ -43,28 +44,34 @@ const SearchResults = ({
                         duracion: 'No disponible'
                     };
 
+                    const isAdded = library.some(
+                        item => item.id === song.id
+                    );
+
                     return (
-                        <article key={album.idAlbum}>
-                            <h2>{album.strAlbum}</h2>
+                        <SearchArticle key={album.idAlbum}>
+                            <SearchSubTitle>{album.strAlbum}</SearchSubTitle>
 
-                            <p>Artista: {album.strArtist}</p>
+                            <SearchInfo>Artista: {album.strArtist}</SearchInfo>
 
-                            <p>Año: {album.intYearReleased || 'No disponible'}</p>
+                            <SearchInfo>Año: {album.intYearReleased || 'No disponible'}</SearchInfo>
 
-                            <button
+                            <SearchButton
+                                isAdded={isAdded}
                                 onClick={() => addToLibrary(song)}
-                            >
-                                Agregar a la biblioteca
-                            </button>
+                                disabled={isAdded}
+                                >
+                                {isAdded ? 'Agregada' : 'Agregar a la biblioteca'}
+                            </SearchButton>
 
-                            <Link className='detalles' to={`/song/${album.idAlbum}`}>
+                            <SearchLink to={`/song/${album.idAlbum}`}>
                                 Ver detalles
-                            </Link>
+                            </SearchLink>
 
-                        </article>
+                        </SearchArticle>
                     );
                 })}
-            </section>
+            </SearchSection>
         </Fragment>
     );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
-import './styles.css'
+import { SongDetailsMain, SongDetailsHeader, SongDetailsHeaderTitle, SongDetailsHeaderSubTitle, SongDetailsInfo, SongDetailsSection, SongDetailsSectionInfo, SongDetailsTracksSection, SongDetailsTracksTitle, SongDetailsTracksList, SongDetailsTrackItem, SongDetailsTrackInfo } from './styles';
 
 function SongDetails() {
     const {id} = useParams();
@@ -46,33 +46,33 @@ function SongDetails() {
     }
 
     return (
-        <main className="song-details">
+        <SongDetailsMain>
 
-            <header className="song-details-header">
-                <h2>Detalles del álbum</h2>
-                <h3>{album.strAlbum}</h3>
-                <p>{album.strArtist}</p>
-            </header>
+            <SongDetailsHeader>
+                <SongDetailsHeaderTitle>Detalles del álbum</SongDetailsHeaderTitle>
+                <SongDetailsHeaderSubTitle>{album.strAlbum}</SongDetailsHeaderSubTitle>
+                <SongDetailsInfo>{album.strArtist}</SongDetailsInfo>
+            </SongDetailsHeader>
 
-            <section className="album-info">
-                <p>
+            <SongDetailsSection>
+                <SongDetailsSectionInfo>
                     <strong>Año:</strong>{' '}
                     {album.intYearReleased || 'No disponible'}
-                </p>
+                </SongDetailsSectionInfo>
 
-                <p>
+                <SongDetailsSectionInfo>
                     <strong>Género:</strong>{' '}
                     {album.strGenre || 'No disponible'}
-                </p>
+                </SongDetailsSectionInfo>
 
-                <p>
+                <SongDetailsSectionInfo>
                     <strong>Descripción:</strong>{' '}
                     {album.strDescriptionEN || 'No hay descripción disponible.'}
-                </p>
-            </section>
+                </SongDetailsSectionInfo>
+            </SongDetailsSection>
 
-            <section className="tracks-section">
-                <h3>Canciones del álbum</h3>
+            <SongDetailsTracksSection>
+                <SongDetailsTracksTitle>Canciones del álbum</SongDetailsTracksTitle>
 
                 {tracksError ? (
                     <div>
@@ -85,7 +85,7 @@ function SongDetails() {
                 ) : tracks.length === 0 ? (
                     <p>No se encontraron canciones para este álbum.</p>
                 ) : (
-                    <ol className="tracks-list">
+                    <SongDetailsTracksList>
                         {tracks.map((track) => {
                             const duration = Number(track.intDuration);
 
@@ -97,20 +97,20 @@ function SongDetails() {
                                     : 'No disponible';
 
                             return (
-                                <li key={track.idTrack}>
+                                <SongDetailsTrackItem key={track.idTrack}>
                                     <strong>{track.strTrack}</strong>
-                                    <span className="track-duration">
+                                    <SongDetailsTrackInfo>
                                         {' '} — Duración: {durationText}
                                         {' '} — Pista: {track.intTrackNumber || 'No disponible'}
-                                    </span>
-                                </li>
+                                    </SongDetailsTrackInfo>
+                                </SongDetailsTrackItem>
                             );
                         })}
-                    </ol>
+                    </SongDetailsTracksList>
                 )}
-            </section>
+            </SongDetailsTracksSection>
 
-        </main>
+        </SongDetailsMain>
     );
 }
 

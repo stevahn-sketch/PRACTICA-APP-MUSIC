@@ -1,10 +1,12 @@
-input {
+import styled from 'styled-components';
+
+const SearchInput = styled.input`
     width: 12rem;
     margin-left: 20px;
     background-color: #fff;
-}
+`;
 
-button {
+const SearchButton = styled.button`
     color: #fff;
     background-color: #0278af;
 
@@ -17,4 +19,9 @@ button {
     &:active {
         transform: scale(0.95);
     }
+`;
+
+export {
+    SearchInput,
+    SearchButton
 }

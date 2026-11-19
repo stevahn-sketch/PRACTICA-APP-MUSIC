@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { HeaderStyles,HeaderButton } from './styles';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -11,22 +12,22 @@ const Header = () => {
 
     return (
         <header className="App-header">
-            <h1>Mi aplicación de música</h1>
+            <HeaderStyles>Mi aplicación de música</HeaderStyles>
 
             <nav>
-                <button
+                <HeaderButton
                     onClick={() => navigate('/')}
                     disabled={isHome}
                 >
                     Inicio
-                </button>
+                </HeaderButton>
 
-                <button
+                <HeaderButton
                     onClick={() => navigate('/library')}
                     disabled={isLibrary}
                 >
                     Biblioteca
-                </button>
+                </HeaderButton>
             </nav>
         </header>
     );

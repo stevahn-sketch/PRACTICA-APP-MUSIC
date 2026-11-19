@@ -1,9 +1,13 @@
-header h1 {
-    color: #fff;
-    margin-left: 20px;
-}
+import styled from 'styled-components';
 
-header nav button {
+const HeaderStyles = styled.header`
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+`;
+
+const HeaderButton = styled.button`
     background-color: #0278af;
     color: #fff;
     border: none;
@@ -23,4 +27,9 @@ header nav button {
     &:active {
         transform: scale(0.95);
     }
+`;
+
+export {
+    HeaderStyles,
+    HeaderButton
 }
