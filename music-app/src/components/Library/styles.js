@@ -30,9 +30,32 @@ const LibrarySubTitle = styled.h3`
     margin-bottom: 5px;
 `;
 
+const LibraryRemoveButton = styled.button`
+    background-color: #0278af;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.1s ease;
+
+    &:hover {
+        background-color: #fff;
+        color: #0278af;
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+`;
+
 export { 
     LibraryArticle,
     LibraryTitle,
     LibraryInfo,
-    LibrarySubTitle
+    LibrarySubTitle,
+    LibraryRemoveButton
 };
